@@ -1,3 +1,8 @@
+// To Do's
+
+// Use env variable for the firebase auth
+
+
 'use client'
 
 import Image from 'next/image'
