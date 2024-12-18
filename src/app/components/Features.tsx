@@ -29,7 +29,7 @@ export default function Features() {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
             Master GATE with our <span className="text-purple-600">Powerful Features</span>
           </h2>
           <p className="text-gray-600">
@@ -39,7 +39,7 @@ export default function Features() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold mb-6">Practice Real GATE Questions</h3>
+            <h3 className="text-2xl font-bold mb-6 text-black">Practice Real GATE Questions</h3>
             <p className="text-gray-600 mb-6">
               Sharpen your focus and conquer high-yield topics with our massive, subject & topic-wise online Question Bank featuring 10,000+ GATE questions. Maximize your score and identify frequently tested areas.
             </p>
@@ -48,7 +48,7 @@ export default function Features() {
                 <div key={index} className="flex items-start space-x-3">
                   <feature.icon className="w-6 h-6 text-purple-600 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-sm">{feature.title}</h4>
+                    <h4 className="font-semibold text-sm text-black">{feature.title}</h4>
                     <p className="text-sm text-gray-500">{feature.description}</p>
                   </div>
                 </div>
