@@ -1,25 +1,21 @@
-import { QuestionView } from '@/components/QuestionView'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ChevronLeft } from 'lucide-react'
+import { QuestionView } from '@/components/QuestionView';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 
-// Using the exact type that Next.js expects for server components
-type PageProps = {
-  params: Promise<{ subject: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+// Define the types for params and searchParams
+type Params = Promise<{ subject: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default async function PracticePage(props: PageProps) {
-  // Await both params and searchParams at the start
-  const [params, searchParams] = await Promise.all([
-    props.params,
-    props.searchParams
-  ])
+export default async function PracticePage({ params, searchParams }: { params: Params; searchParams: SearchParams }) {
+  // Await params and searchParams to resolve them
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
 
-  // Now we can safely use the subject from our resolved params
-  const formattedSubject = params.subject
-    ? params.subject.replace(/-/g, ' ')
-    : 'Unknown Subject'
+  // Format the subject for display
+  const formattedSubject = resolvedParams.subject
+    ? resolvedParams.subject.replace(/-/g, ' ')
+    : 'Unknown Subject';
 
   return (
     <div className="container mx-auto p-6">
@@ -34,11 +30,11 @@ export default async function PracticePage(props: PageProps) {
           {formattedSubject}
         </h1>
       </div>
-      {params.subject ? (
-        <QuestionView subject={params.subject} />
+      {resolvedParams.subject ? (
+        <QuestionView subject={resolvedParams.subject} />
       ) : (
         <p className="text-red-500">Subject is not available.</p>
       )}
     </div>
-  )
+  );
 }
