@@ -3,17 +3,25 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 
+// Even though TypeScript suggests these are synchronous, Next.js treats them as async
+interface PageProps {
+  params: {
+    subject: string;
+  };
+  searchParams?: Record<string, string | string[] | undefined>;
+}
+
 export default async function PracticePage({
   params,
-}: {
-  params: Promise<{ subject: string }> | { subject: string }
-}) {
-  // First, we need to await the entire params object
+}: PageProps) {
+  // We need to await the entire params object first
   const resolvedParams = await Promise.resolve(params)
+  // Then we need to await the subject property specifically
+  const resolvedSubject = await Promise.resolve(resolvedParams.subject)
   
-  // Now we can safely access the subject property from our resolved params
-  const formattedSubject = resolvedParams.subject 
-    ? resolvedParams.subject.replace(/-/g, ' ') 
+  // Now we can safely use the resolved subject
+  const formattedSubject = resolvedSubject 
+    ? resolvedSubject.replace(/-/g, ' ') 
     : 'Unknown Subject'
 
   return (
@@ -29,8 +37,8 @@ export default async function PracticePage({
           {formattedSubject}
         </h1>
       </div>
-      {resolvedParams.subject ? (
-        <QuestionView subject={resolvedParams.subject} />
+      {resolvedSubject ? (
+        <QuestionView subject={resolvedSubject} />
       ) : (
         <p className="text-red-500">Subject is not available.</p>
       )}
