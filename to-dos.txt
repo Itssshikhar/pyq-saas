@@ -1,0 +1,3 @@
+Great. 
+Now that this is done, what I want to do is that after the user completes the firebase login, it redirects to a different domain, like app.pyqadda, where we can display questions, added image for references.
+What do you suggest?
