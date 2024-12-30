@@ -3,24 +3,22 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 
-// Define the shape of our parameters
-type PageParams = {
-  subject: string;
+// Using the exact type that Next.js expects for server components
+type PageProps = {
+  params: Promise<{ subject: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-// Define our props type that expects params to be a Promise
-type Props = {
-  params: Promise<PageParams>;
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+export default async function PracticePage(props: PageProps) {
+  // Await both params and searchParams at the start
+  const [params, searchParams] = await Promise.all([
+    props.params,
+    props.searchParams
+  ])
 
-export default async function PracticePage(props: Props) {
-  // First, await the entire params object
-  const resolvedParams = await props.params
-  
-  // Format the subject string after we have resolved the params
-  const formattedSubject = resolvedParams.subject
-    ? resolvedParams.subject.replace(/-/g, ' ')
+  // Now we can safely use the subject from our resolved params
+  const formattedSubject = params.subject
+    ? params.subject.replace(/-/g, ' ')
     : 'Unknown Subject'
 
   return (
@@ -36,8 +34,8 @@ export default async function PracticePage(props: Props) {
           {formattedSubject}
         </h1>
       </div>
-      {resolvedParams.subject ? (
-        <QuestionView subject={resolvedParams.subject} />
+      {params.subject ? (
+        <QuestionView subject={params.subject} />
       ) : (
         <p className="text-red-500">Subject is not available.</p>
       )}
