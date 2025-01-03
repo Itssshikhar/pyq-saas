@@ -4,15 +4,15 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 const subjects = [
-    { name: 'Digital Logic', questionCount: 533 },
-    { name: 'Computer Organization', questionCount: 551},
-    { name: 'Programming and Data Structures', questionCount: 460 },
-    { name: 'Algorithms', questionCount: 638 },
-    { name: 'Theory of Computation', questionCount: 566 },
-    { name: 'Compiler Design', questionCount: 781 },
-    { name: 'Operating Systems', questionCount: 374 },
-    { name: 'Databases', questionCount: 266 },
-    { name: 'Computer Networks', questionCount: 321 },
+  { name: 'Digital Logic', questionCount: 533 },
+  { name: 'Computer Organization', questionCount: 551 },
+  { name: 'Programming and Data Structures', questionCount: 460 },
+  { name: 'Algorithms', questionCount: 638 },
+  { name: 'Theory of Computation', questionCount: 566 },
+  { name: 'Compiler Design', questionCount: 781 },
+  { name: 'Operating Systems', questionCount: 374 },
+  { name: 'Databases', questionCount: 266 },
+  { name: 'Computer Networks', questionCount: 321 },
 ]
 
 export function SubjectList() {
@@ -21,10 +21,10 @@ export function SubjectList() {
       {subjects.map((subject) => (
         <div
           key={subject.name}
-          className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+          className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50"
         >
           <div>
-            <h3 className="font-medium text-gray-900 dark:text-white">{subject.name}</h3>
+          <h3 className="font-medium text-gray-900 dark:text-white">{subject.name}</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               No of Questions: {subject.questionCount}
             </p>
@@ -37,3 +37,4 @@ export function SubjectList() {
     </div>
   )
 }
+

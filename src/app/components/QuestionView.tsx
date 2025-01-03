@@ -55,10 +55,15 @@ export function QuestionView({ subject }: { subject: string }) {
   }
 
   const handlePreviousQuestion = () => {
+    console.log('Clicked Previous:', { isFirstQuestion, currentQuestionIndex });
     if (!isFirstQuestion) {
-      setCurrentQuestionIndex(prev => prev - 1)
-      setSelectedAnswer(undefined)
-      setShowExplanation(false)
+      setCurrentQuestionIndex((prev) => {
+        const newIndex = prev - 1;
+        console.log('Updating index to:', newIndex);
+        return newIndex;
+      });
+      setSelectedAnswer(undefined);
+      setShowExplanation(false);
     }
   }
 
@@ -78,7 +83,7 @@ export function QuestionView({ subject }: { subject: string }) {
       </div>
 
       <Card className="p-6">
-        <p className="text-lg mb-6 text-gray-900 dark:text-white">
+        <p className="text-lg mb-6 text-gray-900 dark:text-gray-100">
           {currentQuestion.text}
         </p>
         
@@ -119,21 +124,20 @@ export function QuestionView({ subject }: { subject: string }) {
       </Card>
 
       <div className="flex justify-between items-center">
-        <Button
-          variant="outline"
-          onClick={handlePreviousQuestion}
-          disabled={isFirstQuestion}
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" />
-          Previous
-        </Button>
-        
+      <Button
+        onClick={handlePreviousQuestion} 
+        disabled={isFirstQuestion}
+        className="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 disabled:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <ChevronLeft className="mr-2 h-4 w-4" />
+        Previous
+      </Button>
+
         {!showExplanation && (
           <Button
             onClick={handleCheckAnswer}
             disabled={!selectedAnswer}
-            className="px-8"
-          >
+            className="px-8 bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
             Check Answer
           </Button>
         )}
@@ -141,6 +145,7 @@ export function QuestionView({ subject }: { subject: string }) {
         <Button
           onClick={handleNextQuestion}
           disabled={isLastQuestion || !hasAnswered}
+          className="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
         >
           Next
           <ChevronRight className="ml-2 h-4 w-4" />
