@@ -1,9 +1,9 @@
-import { SubjectList } from '@/app/components/SubjectList'
+import { SubjectList } from '../components/SubjectList'
 
 export default function MainPage() {
   return (
-    <div>
-      <h1 className="text-2xl text-black font-bold mb-6 text-gray-900 dark:text-white">GATE Subjects</h1>
+    <div className="text-primary">
+      <h1 className="text-2xl font-bold mb-6 text-foreground">GATE Subjects</h1>
       <SubjectList />
     </div>
   )

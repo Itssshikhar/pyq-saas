@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
+import { TopBar } from '../components/TopBar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 export default function MainLayout({
   children,
@@ -28,16 +30,19 @@ export default function MainLayout({
   }
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <main className="flex-1 overflow-auto bg-white dark:bg-gray-900">
-        <div className="container mx-auto p-6">
-          {children}
+    <SidebarProvider defaultCollapsed={true}>
+      <div className="flex h-screen bg-white dark:bg-gray-900"> 
+        <Sidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <TopBar />
+          <main className="flex-1 overflow-auto bg-white dark:bg-gray-900">
+            <div className="container mx-auto p-6">
+              {children}
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
+      </div>
+    </SidebarProvider>
   )
 }
-
-
 
