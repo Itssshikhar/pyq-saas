@@ -21,7 +21,7 @@ export default async function PracticePage({ params, searchParams }: { params: P
     <div className="container mx-auto p-6">
       <div className="mb-6">
         <Link href="/main">
-          <Button variant="ghost" className="mb-4">
+        <Button variant="outline" className="mb-4 border-gray-300 text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800">
             <ChevronLeft className="h-4 w-4 mr-2" />
             Back to Subjects
           </Button>

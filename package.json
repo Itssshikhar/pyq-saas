@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@libsql/client": "^0.14.0",
     "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-icons": "^1.3.2",
     "@radix-ui/react-radio-group": "^1.2.2",
