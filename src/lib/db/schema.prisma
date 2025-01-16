@@ -1,0 +1,10 @@
+model Question {
+  id          Int      @id @default(autoincrement())
+  text        String
+  options     String[] // Prisma supports array types
+  correctAnswer Int
+  explanation String
+  subject     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+} 
