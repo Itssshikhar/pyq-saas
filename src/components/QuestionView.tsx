@@ -1,45 +1,46 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Card } from '@/components/ui/card'
-
-// This would typically come from your API
-const questions = [
-  {
-    id: 1,
-    text: "What is the time complexity of quicksort in the average case?",
-    options: [
-      "O(n)",
-      "O(n log n)",
-      "O(n²)",
-      "O(log n)"
-    ],
-    correctAnswer: 1,
-    explanation: "Quicksort has an average time complexity of O(n log n). This is because in the average case, the partition process divides the array into roughly equal halves, leading to a balanced recursion tree."
-  },
-  {
-    id: 2,
-    text: "Which of the following is NOT a characteristic of the Von Neumann architecture?",
-    options: [
-      "Stored program concept",
-      "Separate data and instruction memory",
-      "Sequential instruction execution",
-      "Binary number system"
-    ],
-    correctAnswer: 1,
-    explanation: "The Von Neumann architecture uses a single memory for both data and instructions. Having separate data and instruction memory is a characteristic of Harvard architecture, not Von Neumann architecture."
-  }
-]
+import { Question } from '@/types/question'
 
 export function QuestionView({ subject }: { subject: string }) {
+  const [questions, setQuestions] = useState<Question[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string>()
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string>()
   const [showExplanation, setShowExplanation] = useState(false)
   const [answeredQuestions, setAnsweredQuestions] = useState<Set<number>>(new Set())
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(`/api/questions?subject=${subject}`);
+        if (!response.ok) throw new Error('Failed to fetch questions');
+        const data = await response.json();
+        setQuestions(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuestions();
+  }, [subject]);
+
+  if (loading) {
+    return <div>Loading questions...</div>;
+  }
+
+  if (error || questions.length === 0) {
+    return <div>Error: {error || 'No questions available'}</div>;
+  }
 
   const currentQuestion = questions[currentQuestionIndex]
   const isLastQuestion = currentQuestionIndex === questions.length - 1
@@ -89,7 +90,7 @@ export function QuestionView({ subject }: { subject: string }) {
         >
           {currentQuestion.options.map((option, index) => (
             <div
-              key={index}
+              key={`${currentQuestion.id}-option-index-${index}`}
               className={`flex items-center space-x-2 p-3 rounded-lg border ${
                 showExplanation && index === currentQuestion.correctAnswer
                   ? 'border-green-500 bg-green-50 dark:bg-green-900/20'

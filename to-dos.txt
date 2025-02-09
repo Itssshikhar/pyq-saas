@@ -1,3 +1,24 @@
-Great. 
-Now that this is done, what I want to do is that after the user completes the firebase login, it redirects to a different domain, like app.pyqadda, where we can display questions, added image for references.
-What do you suggest?
+Backend (FastAPI)
+Let's create a new FastAPI service that will:
+    Handle question retrieval with filtering and pagination
+    Track user progress
+    Integrate with the existing Turso database
+    Provide authentication middleware using Firebase tokens
+Frontend Updates
+The current QuestionView.tsx needs:
+    API integration with the new FastAPI backend
+    Loading states and error handling
+    Image display support (currently missing)
+    Progress tracking integration
+    Subject filtering
+Database Schema Updates
+We need to add:
+    User progress tracking
+    Correct answers and explanations
+    Image handling
+    Performance metrics
+    Authentication Flow
+We already have Firebase auth implemented, but we need to:
+    Pass auth tokens to FastAPI
+    Handle session management
+    Implement role-based access if needed
