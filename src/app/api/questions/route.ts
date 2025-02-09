@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db/prisma'
+import { db } from '@/lib/db/turso'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
@@ -6,17 +6,18 @@ export async function GET(request: Request) {
   const subject = searchParams.get('subject')
 
   try {
-    const questions = await prisma.question.findMany({
-      where: {
-        subject: subject || undefined,
-      },
-      // Add pagination if needed
-      // take: 10,
-      // skip: 0,
+    const query = subject 
+      ? 'SELECT * FROM questions WHERE subject = ?'
+      : 'SELECT * FROM questions'
+    
+    const result = await db.execute({
+      sql: query,
+      args: subject ? [subject] : []
     })
-
-    return NextResponse.json(questions)
+    
+    return NextResponse.json(result.rows)
   } catch (error) {
+    console.error('Database error:', error)
     return NextResponse.json(
       { error: 'Failed to fetch questions' },
       { status: 500 }
