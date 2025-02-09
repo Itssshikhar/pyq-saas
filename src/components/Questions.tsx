@@ -62,7 +62,7 @@ export default function Questions() {
                   <div className="font-semibold mb-2">Statements:</div>
                   <ul className="list-disc pl-6">
                     {question.statements.map((statement, index) => (
-                      <li key={index}>{statement}</li>
+                      <li key={`${question.id}-statement-${index}`}>{statement}</li>
                     ))}
                   </ul>
                 </div>
@@ -72,8 +72,8 @@ export default function Questions() {
                 <div>
                   <div className="font-semibold mb-2">Options:</div>
                   <div className="grid gap-2">
-                    {question.options.map((option) => (
-                      <div key={option.label} className="flex gap-2">
+                    {question.options.map((option, index) => (
+                      <div key={`${question.id}-option-index-${index}`} className="flex gap-2">
                         <span className="font-medium">{option.label})</span>
                         <span>{option.text}</span>
                       </div>
@@ -88,7 +88,7 @@ export default function Questions() {
                   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
                     {question.images.map((image, index) => (
                       <img
-                        key={index}
+                        key={`${question.id}-image-${index}`}
                         src={image}
                         alt={`Question ${question.number} - Image ${index + 1}`}
                         className="max-w-full h-auto rounded-lg"

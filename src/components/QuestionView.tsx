@@ -90,7 +90,7 @@ export function QuestionView({ subject }: { subject: string }) {
         >
           {currentQuestion.options.map((option, index) => (
             <div
-              key={index}
+              key={`${currentQuestion.id}-option-index-${index}`}
               className={`flex items-center space-x-2 p-3 rounded-lg border ${
                 showExplanation && index === currentQuestion.correctAnswer
                   ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
