@@ -1,40 +1,95 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PYQ-Adda  
 
-## Getting Started
+**PYA-Adda** is a Previous Year Question (PYQ) Software-as-a-Service (SaaS) platform designed to help aspirants prepare for various competitive exams efficiently. The platform provides easy access to previous year questions, enabling users to streamline their preparation and focus on the most relevant material.  
 
-First, run the development server:
+## Features  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Comprehensive Question Database**: Access a curated collection of previous year questions for various exams.  
+- **User-Friendly Interface**: Intuitive and seamless experience for users to search and browse questions.  
+- **Search and Filter Options**: Easily find questions based on specific topics, years, or difficulty levels.  
+- **Responsive Design**: Optimized for both desktop and mobile devices.  
+- **Scalable Architecture**: Designed to handle growing user traffic and expanding datasets.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project is built using the following technologies:  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend**:  
+  - HTML, CSS, JavaScript  
+  - React.js (for dynamic user interfaces)  
 
-## Learn More
+- **Backend**:  
+  - Python  
+  - Django (REST framework for API development)  
 
-To learn more about Next.js, take a look at the following resources:
+- **Database**:  
+  - PostgreSQL  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Hosting and Deployment**:  
+  - Docker (for containerization)  
+  - AWS (for scalable deployment)  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Additional Tools**:  
+  - Celery (for task queue management)  
+  - Redis (as a message broker)  
 
-## Deploy on Vercel
+## Installation  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To set up **PYQ-Adda**, follow these steps:  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
+1. **Clone the Repository**:  
+   ```bash  
+   git clone https://github.com/Itssshikhar/pyq-saas.git  
+   cd pyq-saas  
+   ```  
 
->>>>>>> a63784fd0d777392a42b4c8ac2df8406d30254f1
+2. **Set Up a Virtual Environment** (recommended):  
+   ```bash  
+   python -m venv env  
+   source env/bin/activate  # On Windows: env\Scripts\activate  
+   ```  
+
+3. **Install Dependencies**:  
+   ```bash  
+   pip install -r requirements.txt  
+   ```  
+
+4. **Set Up Environment Variables**:  
+   Create a `.env` file in the project root and configure it using the provided `.env-sample` template.  
+
+5. **Database Setup**:  
+   ```sql  
+   CREATE DATABASE pyq_saas_db;  
+   ```  
+   Update the `DATABASE_URL` in your `.env` file with your database credentials.  
+
+6. **Run Migrations**:  
+   ```bash  
+   python manage.py migrate  
+   ```  
+
+7. **Run the Application**:  
+   ```bash  
+   python manage.py runserver  
+   ```  
+   The app will be available at `http://localhost:8000`.  
+
+## Usage  
+
+- **Access PYQs**: Browse and search for previous year questions by subject, year, or topic.  
+- **Admin Dashboard**: Manage questions, users, and settings through the admin interface at `http://localhost:8000/admin`.  
+
+## Contributing  
+
+We welcome contributions to improve **PYQ-Adda**.  
+
+1. Fork the repository.  
+2. Create a feature branch.  
+3. Commit changes with descriptive messages.  
+4. Push the branch to your fork and open a pull request.  
+
+Refer to our [Contributing Guide](CONTRIBUTING.md) for more details.  
+
+## License  
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.  
