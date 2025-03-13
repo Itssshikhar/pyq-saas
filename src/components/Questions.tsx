@@ -62,7 +62,11 @@ export default function Questions() {
                   <div className="font-semibold mb-2">Statements:</div>
                   <ul className="list-disc pl-6">
                     {question.statements.map((statement, index) => (
-                      <li key={`${question.id}-statement-${index}`}>{statement}</li>
+                      <li key={`${question.id}-statement-${index}`}>
+                        {typeof statement === 'string' 
+                          ? statement 
+                          : statement.text || JSON.stringify(statement)}
+                      </li>
                     ))}
                   </ul>
                 </div>
