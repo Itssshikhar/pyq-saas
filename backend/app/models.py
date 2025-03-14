@@ -4,6 +4,7 @@ from typing import List, Optional
 class Option(BaseModel):
     label: str
     text: str
+    is_correct: Optional[bool] = False
 
 class QuestionBase(BaseModel):
     number: int
